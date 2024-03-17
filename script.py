@@ -1,10 +1,8 @@
-import random
-import math
-import numpy
+from random import randint 
 
-name = "DheetCode"
+name = 'DheetCode'
 
-def moveTo(x, y, Pirate):
+def moveTo(x , y , Pirate):
     position = Pirate.getPosition()
     if position[0] == x and position[1] == y:
         return 0
@@ -12,56 +10,78 @@ def moveTo(x, y, Pirate):
         return (position[1] < y) * 2 + 1
     if position[1] == y:
         return (position[0] > x) * 2 + 2
-    if random.randint(1, 2) == 1:
+    if randint(1, 2) == 1:
         return (position[0] > x) * 2 + 2
     else:
         return (position[1] < y) * 2 + 1
-
-
-def moveAway(x, y, Pirate):
-    position = Pirate.getPosition()
-    if position[0] == x and position[1] == y:
-        return random.randint(1, 4)
-    if random.randint(1, 2) == 1:
-        return (position[0] < x) * 2 + 2
-    else:
-        return (position[1] > y) * 2 + 1
-
-def circleAround(x, y, radius, Pirate, initial="abc", clockwise=True):
-    position = Pirate.getPosition()
-    rx = position[0]
-    ry = position[1]
-    pos = [[x + i, y + radius] for i in range(-1 * radius, radius + 1)]
-    pos.extend([[x + radius, y + i] for i in range(radius - 1, -1 * radius - 1, -1)])
-    pos.extend([[x + i, y - radius] for i in range(radius - 1, -1 * radius - 1, -1)])
-    pos.extend([[x - radius, y + i] for i in range(-1 * radius + 1, radius)])
-    if [rx, ry] not in pos:
-        if initial != "abc":
-            return moveTo(initial[0], initial[1], Pirate)
-        if rx in [x + i for i in range(-1 * radius, radius + 1)] and ry in [
-            y + i for i in range(-1 * radius, radius + 1)
-        ]:
-            return moveAway(x, y, Pirate)
-        else:
-            return moveTo(x, y, Pirate)
-    else:
-        index = pos.index([rx, ry])
-        return moveTo(
-            pos[(index + (clockwise * 2) - 1) % len(pos)][0],
-            pos[(index + (clockwise * 2) - 1) % len(pos)][1],
-            Pirate,
-        )
     
-def checkIsland(pirate):
-    up = pirate.investigate_up()
-    down = pirate.investigate_down()
-    left = pirate.investigate_left()
-    right = pirate.investigate_right()
-    if (up[0:-1] == "island" or down[0:-1] == "island") and (left[0:-1] == "island" or right[0:-1] == "island"):
-        return True
-    else:
-        return False
+def checkfriends(pirate , quad ):
+    sum = 0 
+    up = pirate.investigate_up()[1]
+    down = pirate.investigate_down()[1]
+    left = pirate.investigate_left()[1]
+    right = pirate.investigate_right()[1]
+    ne = pirate.investigate_ne()[1]
+    nw = pirate.investigate_nw()[1]
+    se = pirate.investigate_se()[1]
+    sw = pirate.investigate_sw()[1]
+    
+    if(quad=='ne'):
+        if(up == 'friend'):
+            sum +=1 
+        if(ne== 'friend'):
+            sum +=1 
+        if(right == 'friend'):
+            sum +=1 
+    if(quad=='se'):
+        if(down == 'friend'):
+            sum +=1 
+        if(right== 'friend'):
+            sum +=1 
+        if(se == 'friend'):
+            sum +=1 
+    if(quad=='sw'):
+        if(down == 'friend'):
+            sum +=1 
+        if(sw== 'friend'): 
+            sum +=1 
+        if(left == 'friend'):
+            sum +=1 
+    if(quad=='nw'):
+        if(up == 'friend'):
+            sum +=1 
+        if(nw == 'friend'):
+            sum +=1 
+        if(left == 'friend'):
+            sum +=1 
 
+    return sum
+    
+def spread(pirate):
+    sw = checkfriends(pirate ,'sw' )
+    se = checkfriends(pirate ,'se' )
+    ne = checkfriends(pirate ,'ne' )
+    nw = checkfriends(pirate ,'nw' )
+    
+    my_dict = {'sw': sw, 'se': se, 'ne': ne, 'nw': nw}
+    sorted_dict = dict(sorted(my_dict.items(), key=lambda item: item[1]))
+
+    x, y = pirate.getPosition()
+    
+    if( x == 0 , y == 0):
+        return randint(1,4)
+    
+    if(sorted_dict[list(sorted_dict())[3]] == 0 ):
+        return randint(1,4)
+    
+    if(list(sorted_dict())[0] == 'sw'):
+        return moveTo(x-1 , y+1 , pirate)
+    elif(list(sorted_dict())[0] == 'se'):
+        return moveTo(x+1 , y+1 , pirate)
+    elif(list(sorted_dict())[0] == 'ne'):
+        return moveTo(x+1 , y-1 , pirate)
+    elif(list(sorted_dict())[0] == 'nw'):
+        return moveTo(x-1 , y-1 , pirate)
 
 def ActPirate(pirate):
     up = pirate.investigate_up()[0]
@@ -114,7 +134,7 @@ def ActPirate(pirate):
         return moveTo(x, y, pirate)
 
     else:
-        return random.randint(1, 4)
+        return spread(pirate)
 
 
 def ActTeam(team):
@@ -124,8 +144,7 @@ def ActTeam(team):
     team.buildWalls(1)
     team.buildWalls(2)
     team.buildWalls(3)
-    # print(team.getTeamSignal())
-    # print(team.trackPlayers())
+
     if s:
         island_no = int(s[0])
         signal = l[island_no - 1]
