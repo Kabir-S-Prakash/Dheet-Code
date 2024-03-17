@@ -2,7 +2,6 @@ import random
 import math
 
 name = "script"
-#Comment hai
 
 def moveTo(x, y, Pirate):
     position = Pirate.getPosition()
