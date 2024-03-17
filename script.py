@@ -2,7 +2,7 @@ import random
 import math
 import numpy
 
-name = "script"
+name = "DheetCode"
 
 def moveTo(x, y, Pirate):
     position = Pirate.getPosition()
