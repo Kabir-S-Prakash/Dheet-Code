@@ -59,7 +59,51 @@ def checkfriends(pirate , quad ):
             sum +=1 
 
     return sum
+
+def downRight():
+    r = randint(1,100)
+    if r>=1 and r<=40:
+        return 3
+    if r>=41 and r<=80:
+        return 2
+    if r>=81 and r<=90:
+        return 1
+    if r>=91 and r<=100:
+        return 4
     
+def upRight():
+    r = randint(1,100)
+    if r>=1 and r<=40:
+        return 1
+    if r>=41 and r<=80:
+        return 2
+    if r>=81 and r<=90:
+        return 3
+    if r>=91 and r<=100:
+        return 4
+    
+def downLeft():
+    r = randint(1,100)
+    if r>=1 and r<=40:
+        return 3
+    if r>=41 and r<=80:
+        return 4
+    if r>=81 and r<=90:
+        return 1
+    if r>=91 and r<=100:
+        return 2
+    
+def upLeft():
+    r = randint(1,100)
+    if r>=1 and r<=40:
+        return 1
+    if r>=41 and r<=80:
+        return 4
+    if r>=81 and r<=90:
+        return 3
+    if r>=91 and r<=100:
+        return 2
+
 def spread(pirate):
     sw = checkfriends(pirate ,'sw' )
     se = checkfriends(pirate ,'se' )
@@ -70,21 +114,33 @@ def spread(pirate):
     sorted_dict = dict(sorted(my_dict.items(), key=lambda item: item[1]))
 
     x, y = pirate.getPosition()
+    xi, yi = pirate.getDeployPoint()
     
-    if( x == 0 , y == 0):
+    if (xi==0 and yi==0 and x<15 and y<15):
+        return downRight()
+    
+    elif (xi==39 and yi==39 and x>24 and y>24):
+        return upLeft()
+    
+    elif (xi==0 and yi==19 and x<15 and y>24):
+        return upRight()
+    
+    elif (xi==39 and yi==0 and x>24 and y<15):
+        return downLeft()
+    
+    elif(sorted_dict[list(sorted_dict)[3]] == 0 ):
         return randint(1,4)
     
-    if(sorted_dict[list(sorted_dict())[3]] == 0 ):
-        return randint(1,4)
-    
-    if(list(sorted_dict())[0] == 'sw'):
+    elif(list(sorted_dict)[0][0] == 'sw'):
         return moveTo(x-1 , y+1 , pirate)
-    elif(list(sorted_dict())[0] == 'se'):
+    elif(list(sorted_dict)[0][0] == 'se'):
         return moveTo(x+1 , y+1 , pirate)
-    elif(list(sorted_dict())[0] == 'ne'):
+    elif(list(sorted_dict)[0][0] == 'ne'):
         return moveTo(x+1 , y-1 , pirate)
-    elif(list(sorted_dict())[0] == 'nw'):
+    elif(list(sorted_dict)[0][0] == 'nw'):
         return moveTo(x-1 , y-1 , pirate)
+    else:
+        return randint(1,4)
 
 def findOppOnIsland(island,pirate):   #island as string 
     x = pirate.getPosition()[0]
@@ -371,16 +427,17 @@ def ActPirate(pirate):
         pirate.setTeamSignal(s)
     
     if island1Pos != () and pirate.trackPlayers()[3] == "oppCapturing":
-        return moveTo(island1Pos[0],island1Pos[1], pirate)
-        findOppOnIsland("island1",pirate)
+        if (x != island1Pos[0] and y != island1Pos[1]):
+            return moveTo(island1Pos[0],island1Pos[1], pirate)
 
     if island2Pos != () and pirate.trackPlayers()[4] == "oppCapturing":
-        return moveTo(island2Pos[0],island2Pos[1], pirate)
-        findOppOnIsland("island2",pirate)
+        if (x != island2Pos[0] and y != island2Pos[1]):
+            return moveTo(island2Pos[0],island2Pos[1], pirate)
 
     if island3Pos != () and pirate.trackPlayers()[5] == "oppCapturing":
-        return moveTo(island3Pos[0],island3Pos[1], pirate)
-        findOppOnIsland("island3",pirate)
+        if (x != island3Pos[0] and y != island3Pos[1]):
+            return moveTo(island3Pos[0],island3Pos[1], pirate)
+        
     
     if pirate.getTeamSignal() != "":
         s = pirate.getTeamSignal()
