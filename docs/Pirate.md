@@ -59,11 +59,11 @@ For example:
 pirate.investigate_down()    # ('island2', 'friend')
 pirate.investigate_up()      # ('wall', 'blank')
 pirate.investigate_left()    # ('blank', 'blank')
-pirate.investigate_right()   # ('enemy', 'blank')
-sw = pirate.investigate_sw() # ('enemy', 'island2')
+pirate.investigate_right()   # ('blank', 'enemy')
+sw = pirate.investigate_sw() # ('island2', 'enemy')
 
-sw[0] # 'enemy'
-sw[1] # 'island2'
+sw[0] # 'island2'
+sw[1] # 'enemy'
 ```
 
 ## Signalling
@@ -72,13 +72,13 @@ sw[1] # 'island2'
 Returns the current signal of the pirate.
 
 ### `setSignal(sig)`
-Sets the signal of the pirate to `sig` if `sig` is a string and its length is less than or equal to 20.
+Sets the signal of the pirate to `sig` if `sig` is a string and its length is less than or equal to 100.
 
 ### `getTeamSignal()`
 Returns the current signal of the team.
 
 ### `setTeamSignal(sig)`
-Sets the signal of the pirate's team to `sig` if `sig` is a string and its length is less than or equal to 20.
+Sets the signal of the pirate's team to `sig` if `sig` is a string and its length is less than or equal to 100.
 
 ## Info
 

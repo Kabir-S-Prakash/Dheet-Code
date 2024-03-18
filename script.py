@@ -145,7 +145,7 @@ def ActPirate(pirate):
     x, y = pirate.getPosition()
     pirate.setSignal("")
     s = pirate.trackPlayers()
-    print(s)
+    
     if (
         (up == "island1" and nw[0] == "island1" and ne[0] == "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (up == "island2" and nw[0] == "island2" and ne[0] == "island2" and (s[1] == "" or s[4] == "oppCaptured"))
@@ -370,13 +370,6 @@ def ActPirate(pirate):
             island3Pos = (x+2,y+2)
         pirate.setTeamSignal(s)
     
-    if pirate.getTeamSignal() != "":
-        s = pirate.getTeamSignal()
-        l = s.split(",")
-        x = int(l[0][1:])
-        y = int(l[1])
-        return moveTo(x, y, pirate)
-    
     if island1Pos != () and pirate.trackPlayers()[3] == "oppCapturing":
         return moveTo(island1Pos[0],island1Pos[1], pirate)
         findOppOnIsland("island1",pirate)
@@ -388,13 +381,20 @@ def ActPirate(pirate):
     if island3Pos != () and pirate.trackPlayers()[5] == "oppCapturing":
         return moveTo(island3Pos[0],island3Pos[1], pirate)
         findOppOnIsland("island3",pirate)
+    
+    if pirate.getTeamSignal() != "":
+        s = pirate.getTeamSignal()
+        l = s.split(",")
+        x = int(l[0][1:])
+        y = int(l[1])
+        return moveTo(x, y, pirate)
+    
     else:
         return spread(pirate)
 
 def ActTeam(team):
     l = team.trackPlayers()
     s = team.getTeamSignal()
-
     team.buildWalls(1)
     team.buildWalls(2)
     team.buildWalls(3)
