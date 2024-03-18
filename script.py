@@ -4,10 +4,12 @@ name = 'DheetCode'
 
 woodPos = [()]
 rumPos = [()]
+island1Pos = () #has coordinates as integers
+island2Pos = ()
+island3Pos = ()
 
 def moveTo(x , y , Pirate):
     position = Pirate.getPosition()
-    print(position)
     if position[0] == x and position[1] == y:
         return 0
     if position[0] == x:
@@ -107,6 +109,12 @@ def ActPirate(pirate):
         or (up == "island3" and nw[0] == "island3" and ne[0] == "island3" and s[2] != "myCaptured")
     ):
         s = up[-1] + str(x) + "," + str(y - 2)
+        if(int(up[-1])==1):
+            island1Pos = (x,y-2)
+        elif(int(up[-1])==2):
+            island2Pos = (x,y-2)
+        elif(int(up[-1])==3):
+            island3Pos = (x,y-2)
         pirate.setTeamSignal(s)
 
     if (
@@ -115,6 +123,12 @@ def ActPirate(pirate):
         or (up == "island3" and nw[0] == "island3" and ne[0] != "island3" and s[2] != "myCaptured")
     ):
         s = up[-1] + str(x-1) + "," + str(y - 2)
+        if(int(up[-1])==1):
+            island1Pos = (x-1,y-2)
+        elif(int(up[-1])==2):
+            island2Pos = (x-1,y-2)
+        elif(int(up[-1])==3):
+            island3Pos = (x-1,y-2)
         pirate.setTeamSignal(s)
 
     if (
@@ -123,6 +137,12 @@ def ActPirate(pirate):
         or (up == "island3" and nw[0] != "island3" and ne[0] == "island3" and s[2] != "myCaptured")
     ):
         s = up[-1] + str(x+1) + "," + str(y - 2)
+        if(int(up[-1])==1):
+            island1Pos = (x+1,y-2)
+        elif(int(up[-1])==2):
+            island2Pos = (x+1,y-2)
+        elif(int(up[-1])==3):
+            island3Pos = (x+1,y-2)
         pirate.setTeamSignal(s)
 
     if (
@@ -131,6 +151,12 @@ def ActPirate(pirate):
         or (down == "island3" and sw[0] == "island3" and se[0] == "island3" and s[2] != "myCaptured")
     ):
         s = down[-1] + str(x) + "," + str(y + 2)
+        if(int(down[-1])==1):
+            island1Pos = (x,y+2)
+        elif(int(down[-1])==2):
+            island2Pos = (x,y+2)
+        elif(int(down[-1])==3):
+            island3Pos = (x,y+2)
         pirate.setTeamSignal(s)
 
     if (
@@ -139,6 +165,12 @@ def ActPirate(pirate):
         or (down == "island3" and sw[0] == "island3" and se[0] != "island3" and s[2] != "myCaptured")
     ):
         s = down[-1] + str(x-1) + "," + str(y + 2)
+        if(int(down[-1])==1):
+            island1Pos = (x-1,y+2)
+        elif(int(down[-1])==2):
+            island2Pos = (x-1,y+2)
+        elif(int(down[-1])==3):
+            island3Pos = (x-1,y+2)
         pirate.setTeamSignal(s)
 
     if (
@@ -147,6 +179,12 @@ def ActPirate(pirate):
         or (down == "island3" and sw[0] != "island3" and se[0] == "island3" and s[2] != "myCaptured")
     ):
         s = down[-1] + str(x+1) + "," + str(y + 2)
+        if(int(down[-1])==1):
+            island1Pos = (x+1,y+2)
+        elif(int(down[-1])==2):
+            island2Pos = (x+1,y+2)
+        elif(int(down[-1])==3):
+            island3Pos = (x+1,y+2)
         pirate.setTeamSignal(s)
 
     if (
@@ -155,6 +193,12 @@ def ActPirate(pirate):
         or (left == "island3" and nw[0] == "island3" and sw[0] == "island3" and s[2] != "myCaptured")
     ):
         s = left[-1] + str(x - 2) + "," + str(y)
+        if(int(left[-1])==1):
+            island1Pos = (x-2,y)
+        elif(int(left[-1])==2):
+            island2Pos = (x-2,y)
+        elif(int(left[-1])==3):
+            island3Pos = (x-2,y)
         pirate.setTeamSignal(s)
 
     if (
@@ -163,6 +207,12 @@ def ActPirate(pirate):
         or (left == "island3" and nw[0] == "island3" and sw[0] != "island3" and s[2] != "myCaptured")
     ):
         s = left[-1] + str(x - 2) + "," + str(y-1)
+        if(int(left[-1])==1):
+            island1Pos = (x-2,y-1)
+        elif(int(left[-1])==2):
+            island2Pos = (x-2,y-1)
+        elif(int(left[-1])==3):
+            island3Pos = (x-2,y-1)
         pirate.setTeamSignal(s)
 
     if (
@@ -171,6 +221,12 @@ def ActPirate(pirate):
         or (left == "island3" and nw[0] != "island3" and sw[0] == "island3" and s[2] != "myCaptured")
     ):
         s = left[-1] + str(x - 2) + "," + str(y+1)
+        if(int(left[-1])==1):
+            island1Pos = (x-2,y+1)
+        elif(int(left[-1])==2):
+            island2Pos = (x-2,y+1)
+        elif(int(left[-1])==3):
+            island3Pos = (x-2,y+1)
         pirate.setTeamSignal(s)
 
     if (
@@ -179,6 +235,12 @@ def ActPirate(pirate):
         or (right == "island3" and ne[0] == "island3" and se[0] == "island3" and s[2] != "myCaptured")
     ):
         s = right[-1] + str(x + 2) + "," + str(y)
+        if(int(right[-1])==1):
+            island1Pos = (x+2,y)
+        elif(int(right[-1])==2):
+            island2Pos = (x+2,y)
+        elif(int(right[-1])==3):
+            island3Pos = (x+2,y)
         pirate.setTeamSignal(s)
 
     if (
@@ -187,6 +249,12 @@ def ActPirate(pirate):
         or (right == "island3" and ne[0] == "island3" and se[0] != "island3" and s[2] != "myCaptured")
     ):
         s = right[-1] + str(x + 2) + "," + str(y-1)
+        if(int(right[-1])==1):
+            island1Pos = (x+2,y-1)
+        elif(int(right[-1])==2):
+            island2Pos = (x+2,y-1)
+        elif(int(right[-1])==3):
+            island3Pos = (x+2,y-1)
         pirate.setTeamSignal(s)
 
     if (
@@ -195,6 +263,12 @@ def ActPirate(pirate):
         or (right == "island3" and ne[0] != "island3" and se[0] == "island3" and s[2] != "myCaptured")
     ):
         s = right[-1] + str(x + 2) + "," + str(y+1)
+        if(int(right[-1])==1):
+            island1Pos = (x+2,y+1)
+        elif(int(right[-1])==2):
+            island2Pos = (x+2,y+1)
+        elif(int(right[-1])==3):
+            island3Pos = (x+2,y+1)
         pirate.setTeamSignal(s)
 
     if (
@@ -203,6 +277,12 @@ def ActPirate(pirate):
         or (ne[0] == "island3" and up != "island3" and right != "island3" and s[2] != "myCaptured")
     ):
         s = ne[0][-1] + str(x+2) + "," + str(y-2)
+        if(int(ne[0][-1])==1):
+            island1Pos = (x+2,y-2)
+        elif(int(ne[0][-1])==2):
+            island2Pos = (x+2,y-2)
+        elif(int(ne[0][-1])==3):
+            island3Pos = (x+2,y-2)
         pirate.setTeamSignal(s)
 
     if (
@@ -211,6 +291,12 @@ def ActPirate(pirate):
         or (nw[0] == "island3" and up != "island3" and left != "island3" and s[2] != "myCaptured")
     ):
         s = nw[0][-1] + str(x-2) + "," + str(y-2)
+        if(int(nw[0][-1])==1):
+            island1Pos = (x-2,y-2)
+        elif(int(nw[0][-1])==2):
+            island2Pos = (x-2,y-2)
+        elif(int(nw[0][-1])==3):
+            island3Pos = (x-2,y-2)
         pirate.setTeamSignal(s)
 
     if (
@@ -219,6 +305,12 @@ def ActPirate(pirate):
         or (sw[0] == "island3" and down != "island3" and left != "island3" and s[2] != "myCaptured")
     ):
         s = sw[0][-1] + str(x-2) + "," + str(y+2)
+        if(int(sw[0][-1])==1):
+            island1Pos = (x-2,y+2)
+        elif(int(sw[0][-1])==2):
+            island2Pos = (x-2,y+2)
+        elif(int(sw[0][-1])==3):
+            island3Pos = (x-2,y+2)
         pirate.setTeamSignal(s)
 
     if (
@@ -227,6 +319,12 @@ def ActPirate(pirate):
         or (se[0] == "island3" and down != "island3" and right != "island3" and s[2] != "myCaptured")
     ):
         s = se[0][-1] + str(x+2) + "," + str(y+2)
+        if(int(se[0][-1])==1):
+            island1Pos = (x+2,y+2)
+        elif(int(se[0][-1])==2):
+            island2Pos = (x+2,y+2)
+        elif(int(se[0][-1])==3):
+            island3Pos = (x+2,y+2)
         pirate.setTeamSignal(s)
     
     if pirate.getTeamSignal() != "":
