@@ -7,6 +7,7 @@ rumPos = [()]
 
 def moveTo(x , y , Pirate):
     position = Pirate.getPosition()
+    print(position)
     if position[0] == x and position[1] == y:
         return 0
     if position[0] == x:
@@ -72,7 +73,7 @@ def spread(pirate):
     x, y = pirate.getPosition()
     
     if( x == 0 , y == 0):
-        return randint(2,3)
+        return randint(1,4)
     
     if(sorted_dict[list(sorted_dict())[3]] == 0 ):
         return randint(1,4)
