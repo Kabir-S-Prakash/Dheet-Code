@@ -183,11 +183,8 @@ def findOppOnIsland(island,pirate):   #island as string
         pirate.setTeamSignal(s)
 
 def ActPirate(pirate):
-    global island1Pos
     island1Pos = ()
-    global island2Pos
     island2Pos = ()
-    global island3Pos
     island3Pos = ()
     up = pirate.investigate_up()[0]
     down = pirate.investigate_down()[0]
@@ -207,225 +204,268 @@ def ActPirate(pirate):
         or (up == "island2" and nw[0] == "island2" and ne[0] == "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (up == "island3" and nw[0] == "island3" and ne[0] == "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = up[-1] + str(x) + "," + str(y - 2)
+        sig = up[-1] + str(x) + "," + str(y - 2)
         if(int(up[-1])==1):
             island1Pos = (x,y-2)
         elif(int(up[-1])==2):
             island2Pos = (x,y-2)
         elif(int(up[-1])==3):
             island3Pos = (x,y-2)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 1
     if (
         (up == "island1" and nw[0] == "island1" and ne[0] != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (up == "island2" and nw[0] == "island2" and ne[0] != "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (up == "island3" and nw[0] == "island3" and ne[0] != "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = up[-1] + str(x-1) + "," + str(y - 2)
+        sig = up[-1] + str(x-1) + "," + str(y - 2)
         if(int(up[-1])==1):
             island1Pos = (x-1,y-2)
         elif(int(up[-1])==2):
             island2Pos = (x-1,y-2)
         elif(int(up[-1])==3):
             island3Pos = (x-1,y-2)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 1
     if (
         (up == "island1" and nw[0] != "island1" and ne[0] == "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (up == "island2" and nw[0] != "island2" and ne[0] == "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (up == "island3" and nw[0] != "island3" and ne[0] == "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = up[-1] + str(x+1) + "," + str(y - 2)
+        sig = up[-1] + str(x+1) + "," + str(y - 2)
         if(int(up[-1])==1):
             island1Pos = (x+1,y-2)
         elif(int(up[-1])==2):
             island2Pos = (x+1,y-2)
         elif(int(up[-1])==3):
             island3Pos = (x+1,y-2)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 1
     if (
         (down == "island1" and sw[0] == "island1" and se[0] == "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (down == "island2" and sw[0] == "island2" and se[0] == "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (down == "island3" and sw[0] == "island3" and se[0] == "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = down[-1] + str(x) + "," + str(y + 2)
+        sig = down[-1] + str(x) + "," + str(y + 2)
         if(int(down[-1])==1):
             island1Pos = (x,y+2)
         elif(int(down[-1])==2):
             island2Pos = (x,y+2)
         elif(int(down[-1])==3):
             island3Pos = (x,y+2)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 3
     if (
         (down == "island1" and sw[0] == "island1" and se[0] != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (down == "island2" and sw[0] == "island2" and se[0] != "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (down == "island3" and sw[0] == "island3" and se[0] != "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = down[-1] + str(x-1) + "," + str(y + 2)
+        sig = down[-1] + str(x-1) + "," + str(y + 2)
         if(int(down[-1])==1):
             island1Pos = (x-1,y+2)
         elif(int(down[-1])==2):
             island2Pos = (x-1,y+2)
         elif(int(down[-1])==3):
             island3Pos = (x-1,y+2)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 3
     if (
         (down == "island1" and sw[0] != "island1" and se[0] == "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (down == "island2" and sw[0] != "island2" and se[0] == "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (down == "island3" and sw[0] != "island3" and se[0] == "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = down[-1] + str(x+1) + "," + str(y + 2)
+        sig = down[-1] + str(x+1) + "," + str(y + 2)
         if(int(down[-1])==1):
             island1Pos = (x+1,y+2)
         elif(int(down[-1])==2):
             island2Pos = (x+1,y+2)
         elif(int(down[-1])==3):
             island3Pos = (x+1,y+2)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 3
     if (
         (left == "island1" and nw[0] == "island1" and sw[0] == "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (left == "island2" and nw[0] == "island2" and sw[0] == "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (left == "island3" and nw[0] == "island3" and sw[0] == "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = left[-1] + str(x - 2) + "," + str(y)
+        sig = left[-1] + str(x - 2) + "," + str(y)
         if(int(left[-1])==1):
             island1Pos = (x-2,y)
         elif(int(left[-1])==2):
             island2Pos = (x-2,y)
         elif(int(left[-1])==3):
             island3Pos = (x-2,y)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 4
     if (
         (left == "island1" and nw[0] == "island1" and sw[0] != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (left == "island2" and nw[0] == "island2" and sw[0] != "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (left == "island3" and nw[0] == "island3" and sw[0] != "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = left[-1] + str(x - 2) + "," + str(y-1)
+        sig = left[-1] + str(x - 2) + "," + str(y-1)
         if(int(left[-1])==1):
             island1Pos = (x-2,y-1)
         elif(int(left[-1])==2):
             island2Pos = (x-2,y-1)
         elif(int(left[-1])==3):
             island3Pos = (x-2,y-1)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 4
     if (
         (left == "island1" and nw[0] != "island1" and sw[0] == "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (left == "island2" and nw[0] != "island2" and sw[0] == "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (left == "island3" and nw[0] != "island3" and sw[0] == "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = left[-1] + str(x - 2) + "," + str(y+1)
+        sig = left[-1] + str(x - 2) + "," + str(y+1)
         if(int(left[-1])==1):
             island1Pos = (x-2,y+1)
         elif(int(left[-1])==2):
             island2Pos = (x-2,y+1)
         elif(int(left[-1])==3):
             island3Pos = (x-2,y+1)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 4
     if (
         (right == "island1" and ne[0] == "island1" and se[0] == "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (right == "island2" and ne[0] == "island2" and se[0] == "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (right == "island3" and ne[0] == "island3" and se[0] == "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = right[-1] + str(x + 2) + "," + str(y)
+        sig = right[-1] + str(x + 2) + "," + str(y)
         if(int(right[-1])==1):
             island1Pos = (x+2,y)
         elif(int(right[-1])==2):
             island2Pos = (x+2,y)
         elif(int(right[-1])==3):
             island3Pos = (x+2,y)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 2
     if (
         (right == "island1" and ne[0] == "island1" and se[0] != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (right == "island2" and ne[0] == "island2" and se[0] != "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (right == "island3" and ne[0] == "island3" and se[0] != "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = right[-1] + str(x + 2) + "," + str(y-1)
+        sig = right[-1] + str(x + 2) + "," + str(y-1)
         if(int(right[-1])==1):
             island1Pos = (x+2,y-1)
         elif(int(right[-1])==2):
             island2Pos = (x+2,y-1)
         elif(int(right[-1])==3):
             island3Pos = (x+2,y-1)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 2
     if (
         (right == "island1" and ne[0] != "island1" and se[0] == "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (right == "island2" and ne[0] != "island2" and se[0] == "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (right == "island3" and ne[0] != "island3" and se[0] == "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = right[-1] + str(x + 2) + "," + str(y+1)
+        sig = right[-1] + str(x + 2) + "," + str(y+1)
         if(int(right[-1])==1):
             island1Pos = (x+2,y+1)
         elif(int(right[-1])==2):
             island2Pos = (x+2,y+1)
         elif(int(right[-1])==3):
             island3Pos = (x+2,y+1)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        return 2
     if (
         (ne[0] == "island1" and up != "island1" and right != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (ne[0] == "island2" and up != "island2" and right != "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (ne[0] == "island3" and up != "island3" and right != "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = ne[0][-1] + str(x+2) + "," + str(y-2)
+        sig = ne[0][-1] + str(x+2) + "," + str(y-2)
         if(int(ne[0][-1])==1):
             island1Pos = (x+2,y-2)
         elif(int(ne[0][-1])==2):
             island2Pos = (x+2,y-2)
         elif(int(ne[0][-1])==3):
             island3Pos = (x+2,y-2)
-        pirate.setTeamSignal(s)
-
+        #pirate.setTeamSignal(sig)
+        if int(sig[0][0]) ==1:
+            if(x != island1Pos[0] and y != island1Pos[1] and (s[0] == '' or s[0] == "myCapturing" or s[3] != "oppCapturing")):
+                moveTo(island1Pos[0],island1Pos[1],pirate)
+        if int(sig[0][0]) ==2:
+            if(x != island2Pos[0] and y != island2Pos[1] and (s[1] == '' or s[1] == "myCapturing" or s[4] != "oppCapturing")):
+                moveTo(island2Pos[0],island2Pos[1],pirate)
+        if int(sig[0][0]) ==3:
+            if(x != island3Pos[0] and y != island3Pos[1] and (s[2] == '' or s[2] == "myCapturing" or s[5] != "oppCapturing")):
+                moveTo(island3Pos[0],island3Pos[1],pirate)
     if (
         (nw[0] == "island1" and up != "island1" and left != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (nw[0] == "island2" and up != "island2" and left != "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (nw[0] == "island3" and up != "island3" and left != "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = nw[0][-1] + str(x-2) + "," + str(y-2)
+        sig = nw[0][-1] + str(x-2) + "," + str(y-2)
         if(int(nw[0][-1])==1):
             island1Pos = (x-2,y-2)
         elif(int(nw[0][-1])==2):
             island2Pos = (x-2,y-2)
         elif(int(nw[0][-1])==3):
             island3Pos = (x-2,y-2)
-        pirate.setTeamSignal(s)
+        #pirate.setTeamSignal(sig)
+        if int(sig[0][0]) ==1:
+            if(x != island1Pos[0] and y != island1Pos[1] and (s[0] == '' or s[0] == "myCapturing" or s[3] != "oppCapturing")):
+                moveTo(island1Pos[0],island1Pos[1],pirate)
+        if int(sig[0][0]) ==2:
+            if(x != island2Pos[0] and y != island2Pos[1] and (s[1] == '' or s[1] == "myCapturing" or s[4] != "oppCapturing")):
+                moveTo(island2Pos[0],island2Pos[1],pirate)
+        if int(sig[0][0]) ==3:
+            if(x != island3Pos[0] and y != island3Pos[1] and (s[2] == '' or s[2] == "myCapturing" or s[5] != "oppCapturing")):
+                moveTo(island3Pos[0],island3Pos[1],pirate)
 
     if (
         (sw[0] == "island1" and down != "island1" and left != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (sw[0] == "island2" and down != "island2" and left != "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (sw[0] == "island3" and down != "island3" and left != "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = sw[0][-1] + str(x-2) + "," + str(y+2)
+        sig = sw[0][-1] + str(x-2) + "," + str(y+2)
         if(int(sw[0][-1])==1):
             island1Pos = (x-2,y+2)
         elif(int(sw[0][-1])==2):
             island2Pos = (x-2,y+2)
         elif(int(sw[0][-1])==3):
             island3Pos = (x-2,y+2)
-        pirate.setTeamSignal(s)
+        #pirate.setTeamSignal(sig)
+        if int(sig[0][0]) ==1:
+            if(x != island1Pos[0] and y != island1Pos[1] and (s[0] == '' or s[0] == "myCapturing" or s[3] != "oppCapturing")):
+                moveTo(island1Pos[0],island1Pos[1],pirate)
+        if int(sig[0][0]) ==2:
+            if(x != island2Pos[0] and y != island2Pos[1] and (s[1] == '' or s[1] == "myCapturing" or s[4] != "oppCapturing")):
+                moveTo(island2Pos[0],island2Pos[1],pirate)
+        if int(sig[0][0]) ==3:
+            if(x != island3Pos[0] and y != island3Pos[1] and (s[2] == '' or s[2] == "myCapturing" or s[5] != "oppCapturing")):
+                moveTo(island3Pos[0],island3Pos[1],pirate)
 
     if (
         (se[0] == "island1" and down != "island1" and right != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (se[0] == "island2" and down != "island2" and right != "island2" and (s[1] == "" or s[4] == "oppCaptured"))
         or (se[0] == "island3" and down != "island3" and right != "island3" and (s[2] == "" or s[5] == "oppCaptured"))
     ):
-        s = se[0][-1] + str(x+2) + "," + str(y+2)
+        sig = se[0][-1] + str(x+2) + "," + str(y+2)
         if(int(se[0][-1])==1):
             island1Pos = (x+2,y+2)
         elif(int(se[0][-1])==2):
             island2Pos = (x+2,y+2)
         elif(int(se[0][-1])==3):
             island3Pos = (x+2,y+2)
-        pirate.setTeamSignal(s)
+        #pirate.setTeamSignal(sig)
+        if int(sig[0][0]) ==1:
+            if(x != island1Pos[0] and y != island1Pos[1] and (s[0] == '' or s[0] == "myCapturing" or s[3] != "oppCapturing")):
+                print(s)
+                moveTo(island1Pos[0],island1Pos[1],pirate)
+        if int(sig[0][0]) ==2:
+            if(x != island2Pos[0] and y != island2Pos[1] and (s[1] == '' or s[1] == "myCapturing" or s[4] != "oppCapturing")):
+                moveTo(island2Pos[0],island2Pos[1],pirate)
+        if int(sig[0][0]) ==3:
+            if(x != island3Pos[0] and y != island3Pos[1] and (s[2] == '' or s[2] == "myCapturing" or s[5] != "oppCapturing")):
+                print(s[5])
+                moveTo(island3Pos[0],island3Pos[1],pirate)
     
+    if (island1Pos != () and x == island1Pos[0] and y == island1Pos[1] and s[0] != "myCaptured"):
+        return 0
+    if (island2Pos != () and x == island2Pos[0] and y == island2Pos[1] and s[1] != "myCaptured"):
+        return 0
+    if (island3Pos != () and x == island3Pos[0] and y == island3Pos[1] and s[2] != "myCaptured"):
+        return 0
     if island1Pos != () and pirate.trackPlayers()[3] == "oppCapturing":
         if (x != island1Pos[0] and y != island1Pos[1]):
             return moveTo(island1Pos[0],island1Pos[1], pirate)
@@ -455,7 +495,7 @@ def ActTeam(team):
     team.buildWalls(1)
     team.buildWalls(2)
     team.buildWalls(3)
-
+    #print(l)
     if s:
         island_no = int(s[0][0])
         signal = l[island_no - 1]
