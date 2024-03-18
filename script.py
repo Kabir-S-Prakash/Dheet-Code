@@ -63,47 +63,47 @@ def checkfriends(pirate , quad ):
     return sum
 
 def downRight():
-    r = randint(1,100)
-    if r>=1 and r<=40:
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=40:
         return 3
-    if r>=41 and r<=80:
+    if r%100>=41 and r%100<=80:
         return 2
-    if r>=81 and r<=90:
+    if r%100>=81 and r%100<=90:
         return 1
-    if r>=91 and r<=100:
+    if r%100>=91 and r%100<100:
         return 4
     
 def upRight():
-    r = randint(1,100)
-    if r>=1 and r<=40:
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=40:
         return 1
-    if r>=41 and r<=80:
+    if r%100>=41 and r%100<=80:
         return 2
-    if r>=81 and r<=90:
+    if r%100>=81 and r%100<=90:
         return 3
-    if r>=91 and r<=100:
+    if r%100>=91 and r%100<100:
         return 4
     
 def downLeft():
-    r = randint(1,100)
-    if r>=1 and r<=40:
+    r = randint(1,1000000)
+    if r%100>=1 and r%100<=40:
         return 3
-    if r>=41 and r<=80:
+    if r%100>=41 and r%100<=80:
         return 4
-    if r>=81 and r<=90:
+    if r%100>=81 and r%100<=90:
         return 1
-    if r>=91 and r<=100:
+    if r%100>=91 and r%100<100:
         return 2
     
 def upLeft():
-    r = randint(1,100)
-    if r>=1 and r<=40:
+    r = randint(1,1000000)
+    if r%100>=1 and r%100<=40:
         return 1
-    if r>=41 and r<=80:
+    if r%100>=41 and r%100<=80:
         return 4
-    if r>=81 and r<=90:
+    if r%100>=81 and r%100<=90:
         return 3
-    if r>=91 and r<=100:
+    if r%100>=91 and r<100:
         return 2
 
 def spread(pirate):
@@ -125,7 +125,7 @@ def spread(pirate):
     elif (xi==39 and yi==39 and x>24 and y>24):
         return upLeft()
     
-    elif (xi==0 and yi==19 and x<15 and y>24):
+    elif (xi==0 and yi==39 and x<15 and y>24):
         return upRight()
     
     elif (xi==39 and yi==0 and x>24 and y<15):
