@@ -4,9 +4,6 @@ name = 'DheetCode'
 
 woodPos = [()]
 rumPos = [()]
-island1Pos = () #has coordinates as integers
-island2Pos = ()
-island3Pos = ()
 
 def moveTo(x , y , Pirate):
     position = Pirate.getPosition()
@@ -89,7 +86,53 @@ def spread(pirate):
     elif(list(sorted_dict())[0] == 'nw'):
         return moveTo(x-1 , y-1 , pirate)
 
+def findOppOnIsland(island,pirate):   #island as string 
+    x = pirate.getPosition()[0]
+    y = pirate.getPosition()[1]
+    up = pirate.investigate_up()
+    down = pirate.investigate_down()
+    left = pirate.investigate_left()
+    right = pirate.investigate_right()
+    current = pirate.investigate_current()
+    nw = pirate.investigate_nw()
+    ne = pirate.investigate_ne()
+    se = pirate.investigate_se()
+    sw = pirate.investigate_sw()
+    if (current[1] == "enemy" or current[1] == "both"):
+        s = island[-1] + str(x) + "," + str(y)
+        pirate.setTeamSignal(s)
+    elif(up[1] == "enemy" or up[1] == "both"):
+        s = island[-1] + str(x) + "," + str(y-1)
+        pirate.setTeamSignal(s)
+    elif(down[1] == "enemy" or down[1] == "both"):
+        s = island[-1] + str(x) + "," + str(y+1)
+        pirate.setTeamSignal(s)
+    elif(left[1] == "enemy" or left[1] == "both"):
+        s = island[-1] + str(x-1) + "," + str(y)
+        pirate.setTeamSignal(s)
+    elif(right[1] == "enemy" or right[1] == "both"):
+        s = island[-1] + str(x+1) + "," + str(y)
+        pirate.setTeamSignal(s)
+    elif(nw[1] == "enemy" or nw[1] == "both"):
+        s = island[-1] + str(x-1) + "," + str(y-1)
+        pirate.setTeamSignal(s)
+    elif(ne[1] == "enemy" or ne[1] == "both"):
+        s = island[-1] + str(x+1) + "," + str(y-1)
+        pirate.setTeamSignal(s)
+    elif(se[1] == "enemy" or se[1] == "both"):
+        s = island[-1] + str(x+1) + "," + str(y+1)
+        pirate.setTeamSignal(s)
+    elif(sw[1] == "enemy" or sw[1] == "both"):
+        s = island[-1] + str(x-1) + "," + str(y+1)
+        pirate.setTeamSignal(s)
+
 def ActPirate(pirate):
+    global island1Pos
+    island1Pos = ()
+    global island2Pos
+    island2Pos = ()
+    global island3Pos
+    island3Pos = ()
     up = pirate.investigate_up()[0]
     down = pirate.investigate_down()[0]
     left = pirate.investigate_left()[0]
@@ -332,9 +375,22 @@ def ActPirate(pirate):
         l = s.split(",")
         x = int(l[0][1:])
         y = int(l[1])
-    
         return moveTo(x, y, pirate)
+    
+    if island1Pos != ():
+        if pirate.trackPlayers()[3] == "oppCapturing":
+            return moveTo(island1Pos[0],island1Pos[1], pirate)
+            findOppOnIsland("island1",pirate)
 
+    if island2Pos != ():
+        if pirate.trackPlayers()[3] == "oppCapturing":
+            return moveTo(island2Pos[0],island2Pos[1], pirate)
+            findOppOnIsland("island2",pirate)
+
+    if island3Pos != ():
+        if pirate.trackPlayers()[3] == "oppCapturing":
+            return moveTo(island3Pos[0],island3Pos[1], pirate)
+            findOppOnIsland("island3",pirate)
     else:
         return spread(pirate)
 
@@ -348,7 +404,7 @@ def ActTeam(team):
     team.buildWalls(3)
 
     if s:
-        island_no = int(s[0])
+        island_no = int(s[0][0])
         signal = l[island_no - 1]
         if signal == "myCaptured":
             team.setTeamSignal("")
