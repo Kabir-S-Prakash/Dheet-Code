@@ -2,6 +2,9 @@ from random import randint
 
 name = 'DheetCode'
 
+woodPos = [()]
+rumPos = [()]
+
 def moveTo(x , y , Pirate):
     position = Pirate.getPosition()
     if position[0] == x and position[1] == y:
@@ -88,6 +91,7 @@ def ActPirate(pirate):
     down = pirate.investigate_down()[0]
     left = pirate.investigate_left()[0]
     right = pirate.investigate_right()[0]
+    current = pirate.investigate_current()
     x, y = pirate.getPosition()
     pirate.setSignal("")
     s = pirate.trackPlayers()
@@ -124,7 +128,7 @@ def ActPirate(pirate):
         s = right[-1] + str(x + 1) + "," + str(y)
         pirate.setTeamSignal(s)
 
-    
+    if current[1] == 
     if pirate.getTeamSignal() != "":
         s = pirate.getTeamSignal()
         l = s.split(",")
