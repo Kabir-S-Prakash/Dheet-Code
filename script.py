@@ -1,4 +1,6 @@
 from random import randint 
+import time
+import random
 
 name = 'DheetCode'
 
@@ -105,6 +107,7 @@ def upLeft():
         return 2
 
 def spread(pirate):
+    random.seed(time.time())
     sw = checkfriends(pirate ,'sw' )
     se = checkfriends(pirate ,'se' )
     ne = checkfriends(pirate ,'ne' )
@@ -450,14 +453,12 @@ def ActPirate(pirate):
         #pirate.setTeamSignal(sig)
         if int(sig[0][0]) ==1:
             if(x != island1Pos[0] and y != island1Pos[1] and (s[0] == '' or s[0] == "myCapturing" or s[3] != "oppCapturing")):
-                print(s)
                 moveTo(island1Pos[0],island1Pos[1],pirate)
         if int(sig[0][0]) ==2:
             if(x != island2Pos[0] and y != island2Pos[1] and (s[1] == '' or s[1] == "myCapturing" or s[4] != "oppCapturing")):
                 moveTo(island2Pos[0],island2Pos[1],pirate)
         if int(sig[0][0]) ==3:
             if(x != island3Pos[0] and y != island3Pos[1] and (s[2] == '' or s[2] == "myCapturing" or s[5] != "oppCapturing")):
-                print(s[5])
                 moveTo(island3Pos[0],island3Pos[1],pirate)
     
     if (island1Pos != () and x == island1Pos[0] and y == island1Pos[1] and s[0] != "myCaptured"):
