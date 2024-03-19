@@ -227,9 +227,60 @@ def spread(pirate):
     else:
         return randint(1,4)
 
+def setEnemySignal(pirate):
+    up = pirate.investigate_up()
+    down = pirate.investigate_down()
+    left = pirate.investigate_left()
+    right = pirate.investigate_right()
+    current = pirate.investigate_current()
+    nw = pirate.investigate_nw()
+    ne = pirate.investigate_ne()
+    se = pirate.investigate_se()
+    sw = pirate.investigate_sw()
+    x,y = pirate.getPosition()
+    if(current[1] == "enemy" or current[1] == "both"):
+        sig = current[0][-1] + str(x)+','+str(y)
+        return sig
+        #pirate.setTeamsignal(sig)
+    if(nw[1] == "enemy" or nw[1] == "both"):
+        sig = nw[0][-1] + str(x-1)+','+str(y-1)
+        return sig
+        #pirate.setTeamsignal(sig)
+    if(up[1] == "enemy" or up[1] == "both"):
+        sig = up[0][-1] + str(x)+','+str(y-1)
+        return sig
+       # pirate.setTeamsignal(sig)
+    if(ne[1] == "enemy" or ne[1] == "both"):
+        sig = ne[0][-1] + str(x+1)+','+str(y-1)
+        return sig
+        #pirate.setTeamsignal(sig)
+    if(right[1] == "enemy" or right[1] == "both"):
+        sig = right[0][-1] + str(x+1)+','+str(y)
+        return sig
+        #pirate.setTeamsignal(sig)
+    if(se[1] == "enemy" or se[1] == "both"):
+        sig = se[0][-1] + str(x+1)+','+str(y+1)
+        return sig
+        #pirate.setTeamsignal(sig)
+    if(down[1] == "enemy" or down[1] == "both"):
+        sig = down[0][-1] + str(x)+','+str(y+1)
+        return sig
+        #pirate.setTeamsignal(sig)
+    if(sw[1] == "enemy" or sw[1] == "both"):
+        sig = sw[0][-1] + str(x-1)+','+str(y+1)
+        return sig
+        #pirate.setTeamsignal(sig)
+    if(left[1] == "enemy" or left[1] == "both"):
+        sig = left[0][-1] + str(x-1)+','+str(y)
+        return sig
+        #pirate.setTeamsignal(sig)
+
 def ActPirate(pirate):
+    global island1Pos
     island1Pos = ()
+    global island2Pos
     island2Pos = ()
+    global island3Pos
     island3Pos = ()
     up = pirate.investigate_up()[0]
     down = pirate.investigate_down()[0]
@@ -243,8 +294,32 @@ def ActPirate(pirate):
     x, y = pirate.getPosition()
     pirate.setSignal("")
     s = pirate.trackPlayers()
+    if(island1Pos != () and s[3] == "oppCapturing"):
+        x1,y1 = island1Pos()
+        sig = "("+str(x1)+","+str(y1)+")"+";"+"("+str(x1-1)+","+str(y1-1)+")"+";"+"("+str(x1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1)+")"+";"+"("+str(x1+1)+","+str(y1+1)+")"+";"+"("+str(x1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1)+")"
+        pirate.setTeamSignal(sig)
 
-    if ((current[0] == "island1" and s[0] != "myCaptured")
+    if(island2Pos != () and s[4] == "oppCapturing"):
+        x1,y1 = island2Pos()
+        sig = "("+str(x1)+","+str(y1)+")"+";"+"("+str(x1-1)+","+str(y1-1)+")"+";"+"("+str(x1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1)+")"+";"+"("+str(x1+1)+","+str(y1+1)+")"+";"+"("+str(x1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1)+")"
+        pirate.setTeamSignal(sig)
+
+    if(island3Pos != () and s[5] == "oppCapturing"):
+        x1,y1 = island3Pos()
+        sig = "("+str(x1)+","+str(y1)+")"+";"+"("+str(x1-1)+","+str(y1-1)+")"+";"+"("+str(x1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1)+")"+";"+"("+str(x1+1)+","+str(y1+1)+")"+";"+"("+str(x1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1)+")"
+        pirate.setTeamSignal(sig)
+    
+
+    if pirate.getTeamSignal() != "":
+        s = pirate.getTeamSignal()
+        print(s)
+        l = s.split(";")
+        randomTile = random.choice(l)
+        xd = int(randomTile[1])
+        yd = int(randomTile[3])
+        return moveTo(xd,yd,pirate)
+        
+    if((current[0] == "island1" and s[0] != "myCaptured")
         or (current[0] == "island2" and s[1] != "myCaptured")
         or (current[0] == "island3" and s[2] != "myCaptured")
         ):
@@ -433,13 +508,13 @@ def ActPirate(pirate):
         #pirate.setTeamSignal(sig)
         if int(sig[0][0]) ==1:
             if(x != island1Pos[0] and y != island1Pos[1] and (s[0] == '' or s[0] == "myCapturing" or s[3] != "oppCapturing")):
-                moveTo(island1Pos[0],island1Pos[1],pirate)
+                return moveTo(island1Pos[0],island1Pos[1],pirate)
         if int(sig[0][0]) ==2:
             if(x != island2Pos[0] and y != island2Pos[1] and (s[1] == '' or s[1] == "myCapturing" or s[4] != "oppCapturing")):
-                moveTo(island2Pos[0],island2Pos[1],pirate)
+                return moveTo(island2Pos[0],island2Pos[1],pirate)
         if int(sig[0][0]) ==3:
             if(x != island3Pos[0] and y != island3Pos[1] and (s[2] == '' or s[2] == "myCapturing" or s[5] != "oppCapturing")):
-                moveTo(island3Pos[0],island3Pos[1],pirate)
+                return moveTo(island3Pos[0],island3Pos[1],pirate)
     if (
         (nw[0] == "island1" and up != "island1" and left != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
         or (nw[0] == "island2" and up != "island2" and left != "island2" and (s[1] == "" or s[4] == "oppCaptured"))
@@ -455,13 +530,13 @@ def ActPirate(pirate):
         #pirate.setTeamSignal(sig)
         if int(sig[0][0]) ==1:
             if(x != island1Pos[0] and y != island1Pos[1] and (s[0] == '' or s[0] == "myCapturing" or s[3] != "oppCapturing")):
-                moveTo(island1Pos[0],island1Pos[1],pirate)
+                return moveTo(island1Pos[0],island1Pos[1],pirate)
         if int(sig[0][0]) ==2:
             if(x != island2Pos[0] and y != island2Pos[1] and (s[1] == '' or s[1] == "myCapturing" or s[4] != "oppCapturing")):
-                moveTo(island2Pos[0],island2Pos[1],pirate)
+                return moveTo(island2Pos[0],island2Pos[1],pirate)
         if int(sig[0][0]) ==3:
             if(x != island3Pos[0] and y != island3Pos[1] and (s[2] == '' or s[2] == "myCapturing" or s[5] != "oppCapturing")):
-                moveTo(island3Pos[0],island3Pos[1],pirate)
+                return moveTo(island3Pos[0],island3Pos[1],pirate)
 
     if (
         (sw[0] == "island1" and down != "island1" and left != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
@@ -478,13 +553,13 @@ def ActPirate(pirate):
         #pirate.setTeamSignal(sig)
         if int(sig[0][0]) ==1:
             if(x != island1Pos[0] and y != island1Pos[1] and (s[0] == '' or s[0] == "myCapturing" or s[3] != "oppCapturing")):
-                moveTo(island1Pos[0],island1Pos[1],pirate)
+                return moveTo(island1Pos[0],island1Pos[1],pirate)
         if int(sig[0][0]) ==2:
             if(x != island2Pos[0] and y != island2Pos[1] and (s[1] == '' or s[1] == "myCapturing" or s[4] != "oppCapturing")):
-                moveTo(island2Pos[0],island2Pos[1],pirate)
+                return moveTo(island2Pos[0],island2Pos[1],pirate)
         if int(sig[0][0]) ==3:
             if(x != island3Pos[0] and y != island3Pos[1] and (s[2] == '' or s[2] == "myCapturing" or s[5] != "oppCapturing")):
-                moveTo(island3Pos[0],island3Pos[1],pirate)
+                return moveTo(island3Pos[0],island3Pos[1],pirate)
 
     if (
         (se[0] == "island1" and down != "island1" and right != "island1" and (s[0] == "" or s[3] == "oppCaptured"))
@@ -501,20 +576,13 @@ def ActPirate(pirate):
         #pirate.setTeamSignal(sig)
         if int(sig[0][0]) ==1:
             if(x != island1Pos[0] and y != island1Pos[1] and (s[0] == '' or s[0] == "myCapturing" or s[3] != "oppCapturing")):
-                moveTo(island1Pos[0],island1Pos[1],pirate)
+                return moveTo(island1Pos[0],island1Pos[1],pirate)
         if int(sig[0][0]) ==2:
             if(x != island2Pos[0] and y != island2Pos[1] and (s[1] == '' or s[1] == "myCapturing" or s[4] != "oppCapturing")):
-                moveTo(island2Pos[0],island2Pos[1],pirate)
+                return moveTo(island2Pos[0],island2Pos[1],pirate)
         if int(sig[0][0]) ==3:
             if(x != island3Pos[0] and y != island3Pos[1] and (s[2] == '' or s[2] == "myCapturing" or s[5] != "oppCapturing")):
-                moveTo(island3Pos[0],island3Pos[1],pirate)
-    
-    if pirate.getTeamSignal() != "":
-        s = pirate.getTeamSignal()
-        l = s.split(",")
-        x = int(l[0][1:])
-        y = int(l[1])
-        return moveTo(x, y, pirate)
+                return moveTo(island3Pos[0],island3Pos[1],pirate)
     
     else:
         return spread(pirate)
@@ -525,7 +593,7 @@ def ActTeam(team):
     team.buildWalls(1)
     team.buildWalls(2)
     team.buildWalls(3)
-    print(l)
+    #print(l)
     if s:
         island_no = int(s[0][0])
         signal = l[island_no - 1]
