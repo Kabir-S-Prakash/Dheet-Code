@@ -106,12 +106,91 @@ def upLeft():
     if r%100>=91 and r<100:
         return 2
 
+def moreRightLessDown():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=55:
+        return 2
+    if r%100>=56 and r%100<=80:
+        return 3
+    if r%100>=81 and r%100<=90:
+        return 1
+    if r%100>=91 and r%100<100:
+        return 4
+
+def moreDownLessRight():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=55:
+        return 3
+    if r%100>=56 and r%100<=80:
+        return 2
+    if r%100>=81 and r%100<=90:
+        return 1
+    if r%100>=91 and r%100<100:
+        return 4
+
+def down():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=70:
+        return 3
+    if r%100>=71 and r%100<=80:
+        return 1
+    if r%100>=81 and r%100<=90:
+        return 2
+    if r%100>=91 and r%100<100:
+        return 4
+
+def right():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=70:
+        return 2
+    if r%100>=71 and r%100<=80:
+        return 1
+    if r%100>=81 and r%100<=90:
+        return 3
+    if r%100>=91 and r%100<100:
+        return 4
+    
+def moreLeftLessDown():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=55:
+        return 4
+    if r%100>=56 and r%100<=80:
+        return 3
+    if r%100>=81 and r%100<=90:
+        return 1
+    if r%100>=91 and r%100<100:
+        return 2
+
+def moreDownLessLeft():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=55:
+        return 3
+    if r%100>=56 and r%100<=80:
+        return 4
+    if r%100>=81 and r%100<=90:
+        return 1
+    if r%100>=91 and r%100<100:
+        return 2
+    
+def left():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=70:
+        return 4
+    if r%100>=71 and r%100<=80:
+        return 1
+    if r%100>=81 and r%100<=90:
+        return 3
+    if r%100>=91 and r%100<100:
+        return 2
+    
 def spread(pirate):
     random.seed(time.time())
     sw = checkfriends(pirate ,'sw' )
     se = checkfriends(pirate ,'se' )
     ne = checkfriends(pirate ,'ne' )
     nw = checkfriends(pirate ,'nw' )
+    X = pirate.getDimensionX()
+    Y = pirate.getDimensionX()
     
     my_dict = {'sw': sw, 'se': se, 'ne': ne, 'nw': nw}
     sorted_dict = dict(sorted(my_dict.items(), key=lambda item: item[1]))
@@ -122,13 +201,16 @@ def spread(pirate):
     if (xi==0 and yi==0 and x<15 and y<15):
         return downRight()
     
-    elif (xi==39 and yi==39 and x>24 and y>24):
+    elif (xi==X-1 and yi==0 and x>X-16 and y<15):
+        return downLeft()
+    
+    elif (xi==X-1 and yi==Y-1 and x>X-16 and y>Y-16):
         return upLeft()
     
-    elif (xi==0 and yi==39 and x<15 and y>24):
+    elif (xi==0 and yi==Y-1 and x<15 and y>Y-16):
         return upRight()
     
-    elif (xi==39 and yi==0 and x>24 and y<15):
+    elif (xi==X-1 and yi==0 and x>X-16 and y<15):
         return downLeft()
     
     elif(sorted_dict[list(sorted_dict)[3]] == 0 ):
@@ -144,46 +226,6 @@ def spread(pirate):
         return moveTo(x-1 , y-1 , pirate)
     else:
         return randint(1,4)
-
-def findOppOnIsland(island,pirate):   #island as string 
-    x = pirate.getPosition()[0]
-    y = pirate.getPosition()[1]
-    up = pirate.investigate_up()
-    down = pirate.investigate_down()
-    left = pirate.investigate_left()
-    right = pirate.investigate_right()
-    current = pirate.investigate_current()
-    nw = pirate.investigate_nw()
-    ne = pirate.investigate_ne()
-    se = pirate.investigate_se()
-    sw = pirate.investigate_sw()
-    if (current[1] == "enemy" or current[1] == "both"):
-        s = island[-1] + str(x) + "," + str(y)
-        pirate.setTeamSignal(s)
-    elif(up[1] == "enemy" or up[1] == "both"):
-        s = island[-1] + str(x) + "," + str(y-1)
-        pirate.setTeamSignal(s)
-    elif(down[1] == "enemy" or down[1] == "both"):
-        s = island[-1] + str(x) + "," + str(y+1)
-        pirate.setTeamSignal(s)
-    elif(left[1] == "enemy" or left[1] == "both"):
-        s = island[-1] + str(x-1) + "," + str(y)
-        pirate.setTeamSignal(s)
-    elif(right[1] == "enemy" or right[1] == "both"):
-        s = island[-1] + str(x+1) + "," + str(y)
-        pirate.setTeamSignal(s)
-    elif(nw[1] == "enemy" or nw[1] == "both"):
-        s = island[-1] + str(x-1) + "," + str(y-1)
-        pirate.setTeamSignal(s)
-    elif(ne[1] == "enemy" or ne[1] == "both"):
-        s = island[-1] + str(x+1) + "," + str(y-1)
-        pirate.setTeamSignal(s)
-    elif(se[1] == "enemy" or se[1] == "both"):
-        s = island[-1] + str(x+1) + "," + str(y+1)
-        pirate.setTeamSignal(s)
-    elif(sw[1] == "enemy" or sw[1] == "both"):
-        s = island[-1] + str(x-1) + "," + str(y+1)
-        pirate.setTeamSignal(s)
 
 def ActPirate(pirate):
     island1Pos = ()
@@ -483,7 +525,7 @@ def ActTeam(team):
     team.buildWalls(1)
     team.buildWalls(2)
     team.buildWalls(3)
-    #print(l)
+    print(l)
     if s:
         island_no = int(s[0][0])
         signal = l[island_no - 1]
