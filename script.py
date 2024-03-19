@@ -201,6 +201,12 @@ def ActPirate(pirate):
     x, y = pirate.getPosition()
     pirate.setSignal("")
     s = pirate.trackPlayers()
+
+    if ((current[0] == "island1" and s[0] != "myCaptured")
+        or (current[0] == "island2" and s[1] != "myCaptured")
+        or (current[0] == "island3" and s[2] != "myCaptured")
+        ):
+        return 0
     
     if (
         (up == "island1" and nw[0] == "island1" and ne[0] == "island1" and (s[0] == "" or s[3] == "oppCaptured"))
@@ -460,25 +466,6 @@ def ActPirate(pirate):
         if int(sig[0][0]) ==3:
             if(x != island3Pos[0] and y != island3Pos[1] and (s[2] == '' or s[2] == "myCapturing" or s[5] != "oppCapturing")):
                 moveTo(island3Pos[0],island3Pos[1],pirate)
-    
-    if (island1Pos != () and x == island1Pos[0] and y == island1Pos[1] and s[0] != "myCaptured"):
-        return 0
-    if (island2Pos != () and x == island2Pos[0] and y == island2Pos[1] and s[1] != "myCaptured"):
-        return 0
-    if (island3Pos != () and x == island3Pos[0] and y == island3Pos[1] and s[2] != "myCaptured"):
-        return 0
-    if island1Pos != () and pirate.trackPlayers()[3] == "oppCapturing":
-        if (x != island1Pos[0] and y != island1Pos[1]):
-            return moveTo(island1Pos[0],island1Pos[1], pirate)
-
-    if island2Pos != () and pirate.trackPlayers()[4] == "oppCapturing":
-        if (x != island2Pos[0] and y != island2Pos[1]):
-            return moveTo(island2Pos[0],island2Pos[1], pirate)
-
-    if island3Pos != () and pirate.trackPlayers()[5] == "oppCapturing":
-        if (x != island3Pos[0] and y != island3Pos[1]):
-            return moveTo(island3Pos[0],island3Pos[1], pirate)
-        
     
     if pirate.getTeamSignal() != "":
         s = pirate.getTeamSignal()
