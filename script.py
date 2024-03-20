@@ -243,11 +243,11 @@ def spread(pirate):
         if(x<=n/2 and y<=n/2):
             return downRight()
         if(x>=n/2+1 and x<=n-1 and y<=n/2):
-            return moreDownLessRight()
-            # return downRight()
+            # return moreDownLessRight()
+            return downRight()
         if(x<=n/2 and y>=n/2+1 and y<=n-1):
-            return moreRightLessDown()
-            # return downRight()
+            # return moreRightLessDown()
+            return downRight()
         else:
             return randint(1,4)
         
@@ -255,11 +255,11 @@ def spread(pirate):
         if(x>=n/2-1 and x<=n-1 and y<=n/2):
             return downLeft()
         if(x<=n/2-2 and y<=n/2):
-            return moreDownLessLeft()
-            # return downLeft()
+            # return moreDownLessLeft()
+            return downLeft()
         if(x>=n/2-1 and x<=n-1 and y>=n/2+1 and y<=n-1):
-            return moreLeftLessDown()
-            # return downLeft()
+            # return moreLeftLessDown()
+            return downLeft()
         else:
             return randint(1,4)
         
@@ -267,9 +267,11 @@ def spread(pirate):
         if(x<=n/2 and y>=n/2-1 and y<=n-1):
             return upRight()
         if(x<=n/2 and y<=n/2-2):
-            return moreRightLessUp()
+            # return moreRightLessUp()
+            return upRight()
         if(x>=n/2+1 and x<=n-1 and y>=n/2-1 and y<=n-1):
-            return moreUpLessRight()
+            # return moreUpLessRight()
+            return upRight()
         else:
             return randint(1,4)
         
@@ -277,9 +279,13 @@ def spread(pirate):
         if(x>=n/2-1 and x<=n-1 and y>=n/2-1 and y<=n-1):
             return upLeft()
         if(x<=n/2-2 and y>=n/2-1 and y<=n-1):
-            return moreUpLessLeft()
+            # return moreUpLessLeft()
+            return upLeft()
         if(x>=n/2-1 and x<=n-1 and y<=n/2-2):
-            return moreLeftLessUp()
+            # return moreLeftLessUp()
+            return upLeft()
+        else:
+            return randint(1,4)
     
     elif(list(sorted_dict)[0][0] == 'sw'):
         return moveTo(x-1 , y+1 , pirate)
