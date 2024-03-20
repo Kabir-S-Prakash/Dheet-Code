@@ -182,6 +182,50 @@ def left():
     if r%100>=91 and r%100<100:
         return 2
     
+def moreRightLessUp():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=50:
+        return 2
+    if r%100>=51 and r%100<=80:
+        return 1
+    if r%100>=81 and r%100<=90:
+        return 3
+    if r%100>=91 and r%100<100:
+        return 4
+    
+def moreUpLessRight():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=50:
+        return 1
+    if r%100>=51 and r%100<=80:
+        return 2
+    if r%100>=81 and r%100<=90:
+        return 3
+    if r%100>=91 and r%100<100:
+        return 4
+    
+def moreUpLessLeft():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=50:
+        return 1
+    if r%100>=51 and r%100<=80:
+        return 4
+    if r%100>=81 and r%100<=90:
+        return 3
+    if r%100>=91 and r%100<100:
+        return 2
+    
+def moreLeftLessUp():
+    r = randint(1,10000000)
+    if r%100>=1 and r%100<=50:
+        return 4
+    if r%100>=51 and r%100<=80:
+        return 1
+    if r%100>=81 and r%100<=90:
+        return 3
+    if r%100>=91 and r%100<100:
+        return 2
+    
 def spread(pirate):
     sw = checkfriends(pirate ,'sw' )
     se = checkfriends(pirate ,'se' )
@@ -195,17 +239,47 @@ def spread(pirate):
     x, y = pirate.getPosition()
     xi, yi = pirate.getDeployPoint()
     
-    if (xi==0 and yi==0 and x<=int(n/3) and y<=int(n/3)):
-        return downRight()
-    if (xi==n-1 and yi==0 and x>=int(2*n/3) and x<=n-1 and y<=int(n/3)):
-        return downLeft()
-    if (xi==0 and yi==n-1 and x<=int(n/3) and y>=int(2*n/3) and y<=n-1):
-        return upRight()
-    if (xi==n-1 and yi==n-1 and x>=int(2*n/3) and x<=n-1 and y>=int(2*n/3) and y<=n-1):
-        return upLeft()
-    
-    elif(sorted_dict[list(sorted_dict)[3]] == 0 ):
-        return randint(1,4)
+    if (xi==0 and yi==0):
+        if(x<=n/2 and y<=n/2):
+            return downRight()
+        if(x>=n/2+1 and x<=n-1 and y<=n/2):
+            return moreDownLessRight()
+            # return downRight()
+        if(x<=n/2 and y>=n/2+1 and y<=n-1):
+            return moreRightLessDown()
+            # return downRight()
+        else:
+            return randint(1,4)
+        
+    if (xi==n-1 and yi==0):
+        if(x>=n/2-1 and x<=n-1 and y<=n/2):
+            return downLeft()
+        if(x<=n/2-2 and y<=n/2):
+            return moreDownLessLeft()
+            # return downLeft()
+        if(x>=n/2-1 and x<=n-1 and y>=n/2+1 and y<=n-1):
+            return moreLeftLessDown()
+            # return downLeft()
+        else:
+            return randint(1,4)
+        
+    if (xi==0 and yi==n-1):
+        if(x<=n/2 and y>=n/2-1 and y<=n-1):
+            return upRight()
+        if(x<=n/2 and y<=n/2-2):
+            return moreRightLessUp()
+        if(x>=n/2+1 and x<=n-1 and y>=n/2-1 and y<=n-1):
+            return moreUpLessRight()
+        else:
+            return randint(1,4)
+        
+    if (xi==n-1 and yi==n-1):
+        if(x>=n/2-1 and x<=n-1 and y>=n/2-1 and y<=n-1):
+            return upLeft()
+        if(x<=n/2-2 and y>=n/2-1 and y<=n-1):
+            return moreUpLessLeft()
+        if(x>=n/2-1 and x<=n-1 and y<=n/2-2):
+            return moreLeftLessUp()
     
     elif(list(sorted_dict)[0][0] == 'sw'):
         return moveTo(x-1 , y+1 , pirate)
