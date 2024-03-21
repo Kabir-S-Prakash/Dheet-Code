@@ -285,21 +285,6 @@ def ActPirate(pirate):
     x, y = pirate.getPosition()
     pirate.setSignal("")
     s = pirate.trackPlayers()
-    if(island1Pos != () and s[3] == "oppCapturing"):
-        x1,y1 = island1Pos()
-        sig = "("+str(x1)+","+str(y1)+")"+";"+"("+str(x1-1)+","+str(y1-1)+")"+";"+"("+str(x1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1)+")"+";"+"("+str(x1+1)+","+str(y1+1)+")"+";"+"("+str(x1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1)+")"
-        pirate.setTeamSignal(sig)
-
-    if(island2Pos != () and s[4] == "oppCapturing"):
-        x1,y1 = island2Pos()
-        sig = "("+str(x1)+","+str(y1)+")"+";"+"("+str(x1-1)+","+str(y1-1)+")"+";"+"("+str(x1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1)+")"+";"+"("+str(x1+1)+","+str(y1+1)+")"+";"+"("+str(x1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1)+")"
-        pirate.setTeamSignal(sig)
-
-    if(island3Pos != () and s[5] == "oppCapturing"):
-        x1,y1 = island3Pos()
-        sig = "("+str(x1)+","+str(y1)+")"+";"+"("+str(x1-1)+","+str(y1-1)+")"+";"+"("+str(x1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1-1)+")"+";"+"("+str(x1+1)+","+str(y1)+")"+";"+"("+str(x1+1)+","+str(y1+1)+")"+";"+"("+str(x1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1+1)+")"+";"+"("+str(x1-1)+","+str(y1)+")"
-        pirate.setTeamSignal(sig)
-    
 
     if pirate.getTeamSignal() != "":
         s = pirate.getTeamSignal()
@@ -310,6 +295,22 @@ def ActPirate(pirate):
         yd = int(randomTile[3])
         return moveTo(xd,yd,pirate)
         
+    if (pirate.investigate_up()[1]=="enemy"):
+        return 1
+    if (pirate.investigate_down()[1]=="enemy"):
+        return 3
+    if ( pirate.investigate_left()[1]=="enemy" ):
+        return 4
+    if ( pirate.investigate_right()[1]=="enemy" ):
+        return 2
+    if (ne[1]=="enemy"):
+        moveTo(x+1,y-1,pirate)
+    if (nw[1]=="enemy"):
+        moveTo(x-1,y-1,pirate)
+    if (se[1]=="enemy"):
+        moveTo(x+1,y+1,pirate)
+    if (sw[1]=="enemy"):
+        moveTo(x-1,y+1,pirate)
     if((current[0] == "island1" and s[0] != "myCaptured")
         or (current[0] == "island2" and s[1] != "myCaptured")
         or (current[0] == "island3" and s[2] != "myCaptured")
